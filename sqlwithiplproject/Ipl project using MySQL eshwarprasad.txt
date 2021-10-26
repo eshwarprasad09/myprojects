@@ -1,0 +1,41 @@
+﻿use IPL_project;
+
+
+SELECT
+        season,
+        COUNT(season)
+FROM
+        matches
+GROUP BY season
+HAVING COUNT(season) > 1;
+
+
+SELECT
+        winner,
+        COUNT(winner)
+FROM
+        matches
+GROUP BY winner
+HAVING COUNT(winner) > 1;
+
+
+SELECT
+        batting_team,sum(extra_runs)
+FROM
+        matches,deliveries
+where matches.id = deliveries.match_id and season = 2016
+group by batting_team;
+
+
+SELECT
+        bowler,sum(total_runs)/count(bowler) * 6 as economy
+FROM
+        matches,deliveries
+where matches.id = deliveries.match_id and season = 2015
+group by bowler order by economy asc;
+
+
+select
+batsman,sum(batsman_runs) as totalruns from matches,deliveries
+where matches.id = deliveries.match_id and season = 2016
+group by batsman order by totalruns desc;
